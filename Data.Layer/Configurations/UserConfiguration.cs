@@ -13,6 +13,16 @@ namespace Blog.DataLayer.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
+            builder.Property(x => x.Login)
+                .IsRequired()
+                .HasMaxLength(20);
+
+            builder.Property(x => x.Password)
+                .IsRequired()
+                .HasMaxLength(500);
+
+            builder.HasIndex(x => x.Login)
+                .IsUnique();
 
         }
     }

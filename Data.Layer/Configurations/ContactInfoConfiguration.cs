@@ -13,6 +13,9 @@ namespace Blog.DataLayer.Configurations
     {
         public void Configure(EntityTypeBuilder<ContactInfo> builder)
         {
+            builder.Property(x => x.Email)
+                .IsRequired()
+                .HasMaxLength(20);
 
         }
     }
