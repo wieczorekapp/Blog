@@ -17,7 +17,7 @@ namespace Blog.Domain.Entities
         public string LongDescription { get; set; }
         public string Url { get; set; }
         public string ImageUrl { get; set; }
-        public bool Published { get; set; }
+        public bool? Published { get; set; }
         public DateTime PostOn { get; set; }
         public DateTime? Modified { get; set; }
         public PostType Type { get; set; }

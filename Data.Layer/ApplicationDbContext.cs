@@ -23,6 +23,7 @@ namespace Blog.DataLayer
 
             var config = builder.Build();
 
+            // wykorzystanie pliku json do konfiguracji polaczenia z baz danych
             optionsBuilder.UseSqlServer(config["ConnectionString"]);
         }
 
