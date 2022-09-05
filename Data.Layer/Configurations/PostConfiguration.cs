@@ -35,6 +35,16 @@ namespace Blog.DataLayer.Configurations
             builder.Property(x => x.Published)
                 .IsRequired(false);
 
+            builder
+                .HasOne(x => x.User)
+                .WithMany(x => x.Posts)
+                .HasForeignKey(x => x.UserId);
+
+            builder
+                .HasOne(x => x.ApprovedBy)
+                .WithMany(x => x.PostsApproved)
+                .HasForeignKey(x => x.ApprovedByUserId);
+
         }
     }
 }

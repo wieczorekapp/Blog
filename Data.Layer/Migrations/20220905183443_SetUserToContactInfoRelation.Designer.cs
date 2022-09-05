@@ -4,14 +4,16 @@ using Blog.DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Blog.DataLayer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220905183443_SetUserToContactInfoRelation")]
+    partial class SetUserToContactInfoRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,9 +88,6 @@ namespace Blog.DataLayer.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ApprovedByUserId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
@@ -133,8 +132,6 @@ namespace Blog.DataLayer.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ApprovedByUserId");
 
                     b.HasIndex("CategoryId");
 
@@ -221,10 +218,6 @@ namespace Blog.DataLayer.Migrations
 
             modelBuilder.Entity("Blog.Domain.Entities.Post", b =>
                 {
-                    b.HasOne("Blog.Domain.Entities.User", "ApprovedBy")
-                        .WithMany("PostsApproved")
-                        .HasForeignKey("ApprovedByUserId");
-
                     b.HasOne("Blog.Domain.Entities.Category", "Category")
                         .WithMany("Posts")
                         .HasForeignKey("CategoryId")
@@ -236,8 +229,6 @@ namespace Blog.DataLayer.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("ApprovedBy");
 
                     b.Navigation("Category");
 
@@ -269,8 +260,6 @@ namespace Blog.DataLayer.Migrations
                     b.Navigation("ContactInfo");
 
                     b.Navigation("Posts");
-
-                    b.Navigation("PostsApproved");
                 });
 #pragma warning restore 612, 618
         }

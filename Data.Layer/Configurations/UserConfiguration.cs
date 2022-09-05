@@ -24,6 +24,11 @@ namespace Blog.DataLayer.Configurations
             builder.HasIndex(x => x.Login)
                 .IsUnique();
 
+            // one to one relation
+            builder
+                .HasOne(x => x.ContactInfo)
+                .WithOne(x => x.User)
+                .HasForeignKey<ContactInfo>(x => x.UserId);
         }
     }
 }

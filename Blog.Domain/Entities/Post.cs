@@ -22,6 +22,10 @@ namespace Blog.Domain.Entities
         public DateTime? Modified { get; set; }
         public PostType Type { get; set; }
 
+        // relacja jest opcjonalna
+        public int? ApprovedByUserId { get; set; }
+        public User ApprovedBy { get; set; }
+
         public int UserId { get; set; }
         public User User  { get; set; }
 
