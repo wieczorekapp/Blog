@@ -45,6 +45,15 @@ namespace Blog.DataLayer.Configurations
                 .WithMany(x => x.PostsApproved)
                 .HasForeignKey(x => x.ApprovedByUserId);
 
+            builder
+                .HasMany(x => x.Tags)
+                .WithMany(x => x.Posts)
+                .UsingEntity<PostTag>(
+                   x => x.HasOne(x => x.Tag).WithMany().HasForeignKey(x => x.TagId),
+                   x=> x.HasOne(x => x.Post).WithMany().HasForeignKey(x => x.PostId))
+                .Property(x => x.CreatedDate)
+                .HasDefaultValueSql("getdate()");
+
         }
     }
 }
